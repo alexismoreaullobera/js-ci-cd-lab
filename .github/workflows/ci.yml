@@ -1,7 +1,7 @@
-name : CI
+name: CI
 
-on :
-  push :
+on:
+  push:
     branches: ["main"]
   pull_request:
     branches: ["main"]
@@ -10,16 +10,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps :
+    steps:
       - name: Checkout le repo
-        uses: action/checkout@v4
+        uses: actions/checkout@v4
 
-      - name : Installer Node
+      - name: Installer Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name : Installer les dépendances
+      - name: Installer les dépendances
         run: npm install
 
       - name: Lancer les tests
