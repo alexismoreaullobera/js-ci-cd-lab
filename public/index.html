@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS CI/CD Lab - Sum Function</title>
+</head>
+
+<body>
+    <h1>JS CI/CD Lab</h1>
+    <p>Entre des nombre séparés par des espaces, des virgules ou des retours à la ligne : </p>
+    <textarea id="numbersInput" rows="4" cols="40"></textarea>
+    <br />
+    <button id="btnCalculate">Calculer la somme</button>
+
+    <p>Résultat : <span id="result">0</span></p>
+
+    <script src="../src/sum.js"></script>
+    <script>
+        const textarea = document.getElementById('numbersInput');
+        const resultSpan = document.getElementById('result');
+        const btn = document.getElementById('btnCalculate');
+
+        btn.addEventListener('click', () => {
+            const raw = textarea.value;
+
+            const values = raw
+                .split(/[\s,]+/)
+                .filter(x => x.trim() !== '')
+                .map(Number);
+
+            if (values.length === 0 || values.some(isNaN)) {
+                resultSpan.textContent = 'Erreur de saisie';
+                return;
+            }
+
+            let total = values[0];
+            for (let i = 1; i < values.length; i++) {
+                total = sum(total, values[i]);
+            }
+
+            resultSpan.textContent = total;
+        });
+    </script>
+</body>
+
+</html>
